@@ -23,6 +23,20 @@ ganache-cli -l 9999999999999 -g 1 -a 50 -e 10000 -m "candy maple cake sugar pudd
 
 ```
 
+
+```
+# compile
+zokrates compile -i root.zok
+# perform the setup phase
+zokrates setup
+# execute the program
+zokrates compute-witness -a 337 113569
+# generate a proof of computation
+zokrates generate-proof
+# export a solidity verifier
+zokrates export-verifier
+```
+
 # Project Resources
 
 * [Remix - Solidity IDE](https://remix.ethereum.org/)

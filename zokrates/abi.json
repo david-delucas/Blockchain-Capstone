@@ -1,0 +1,19 @@
+{
+  "inputs": [
+    {
+      "name": "a_field",
+      "public": false,
+      "type": "field"
+    },
+    {
+      "name": "b_field",
+      "public": true,
+      "type": "field"
+    }
+  ],
+  "outputs": [
+    {
+      "type": "field"
+    }
+  ]
+}
