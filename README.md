@@ -15,6 +15,14 @@ The capstone will build upon the knowledge you have gained in the course in orde
 ## Storefront link
 
 
+# Misc. code
+
+```
+
+ganache-cli -l 9999999999999 -g 1 -a 50 -e 10000 -m "candy maple cake sugar pudding cream honey rich smooth crumble sweet treat"
+
+```
+
 # Project Resources
 
 * [Remix - Solidity IDE](https://remix.ethereum.org/)

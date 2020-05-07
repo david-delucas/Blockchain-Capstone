@@ -33,8 +33,16 @@ contract Ownable {
     }
 
     //  5) create an event that emits anytime ownerShip is transfered (including in the constructor)
-    event OwnerShip(address newOwner);
+    event OwnerShip(address owner);
+    
 
+    function getOwner()
+                        public
+                        view
+                        returns(address)
+    {
+        return _owner;
+    }    
 }
 
 //  TODO's: Create a Pausable contract that inherits from the Ownable contract
@@ -268,14 +276,20 @@ contract ERC721 is Pausable, ERC165 {
     function _transferFrom(address from, address to, uint256 tokenId) internal {
 
         // TODO: require from address is the owner of the given token
+        require(from == ownerOf(tokenId), "Sender address should be the owner of the token");
 
         // TODO: require token is being transfered to valid address
-        
+        require(to != address(0), "token should be transfered to a valid address");        
         // TODO: clear approval
+        _clearApproval(tokenId);
 
         // TODO: update token counts & transfer ownership of the token ID 
+        _ownedTokensCount[to].increment();
+        _tokenOwner[tokenId] = to;
 
         // TODO: emit correct event
+        emit Transfer(from, to, tokenId);
+
     }
 
     /**
@@ -533,6 +547,13 @@ contract ERC721Metadata is ERC721Enumerable, usingOraclize {
     // TIP #2: you can also use uint2str() to convert a uint to a string
         // see https://github.com/oraclize/ethereum-api/blob/master/oraclizeAPI_0.5.sol for strConcat()
     // require the token exists before setting
+    function setTokenURI(uint256 tokenId) public
+    {
+
+        if (_exists(tokenId)) {
+            _tokenURIs[tokenId] = strConcat(_baseTokenURI, uint2str(tokenId));
+        }
+    }
 
 }
 

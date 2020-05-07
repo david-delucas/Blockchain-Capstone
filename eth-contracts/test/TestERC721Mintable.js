@@ -1,4 +1,4 @@
-var ERC721MintableComplete = artifacts.require('ERC721MintableComplete');
+var ERC721MintableComplete = artifacts.require('CustomERC721Token');
 
 contract('TestERC721Mintable', accounts => {
 
@@ -10,10 +10,23 @@ contract('TestERC721Mintable', accounts => {
             this.contract = await ERC721MintableComplete.new({from: account_one});
 
             // TODO: mint multiple tokens
+            await this.contract.mint(account_one, 1);
+            await this.contract.mint(account_one, 2);
+            await this.contract.mint(account_one, 3);
+            await this.contract.mint(account_one, 4);
+            await this.contract.mint(account_one, 5);
+            await this.contract.mint(account_one, 6);
+            await this.contract.mint(account_one, 7);
+            await this.contract.mint(account_one, 8);
+            //await this.contract.mint(account_two, 9);
+            //await this.contract.mint(account_two, 10);
+
         })
 
         it('should return total supply', async function () { 
-            
+            const result = await this.contract.totalSupply();
+            assert.equal(result, 8,"Incorrect total supply" );
+
         })
 
         it('should get token balance', async function () { 
