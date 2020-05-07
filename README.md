@@ -2,6 +2,19 @@
 
 The capstone will build upon the knowledge you have gained in the course in order to build a decentralized housing product. 
 
+# Instructions - how to test the code
+
+# Project details
+
+## Contract Addresses
+
+## Contract Abi's 
+
+## OpenSea MarketPlace 
+
+## Storefront link
+
+
 # Project Resources
 
 * [Remix - Solidity IDE](https://remix.ethereum.org/)
