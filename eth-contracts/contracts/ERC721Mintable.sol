@@ -9,16 +9,32 @@ import "./Oraclize.sol";
 contract Ownable {
     //  TODO's
     //  1) create a private '_owner' variable of type address with a public getter function
+    address private _owner;
     //  2) create an internal constructor that sets the _owner var to the creater of the contract 
-    //  3) create an 'onlyOwner' modifier that throws if called by any account other than the owner.
-    //  4) fill out the transferOwnership function
-    //  5) create an event that emits anytime ownerShip is transfered (including in the constructor)
+    constructor() internal
+    {
+        _owner = msg.sender;
+        emit OwnerShip(_owner);
+    }
 
+
+    //  3) create an 'onlyOwner' modifier that throws if called by any account other than the owner.
+    modifier onlyOwner() {
+        require(_owner == msg.sender, "Not allowed call by any account other than the owner.");
+        _;
+    }
+
+    //  4) fill out the transferOwnership function
     function transferOwnership(address newOwner) public onlyOwner {
         // TODO add functionality to transfer control of the contract to a newOwner.
         // make sure the new owner is a real address
-
+        _owner = newOwner;
+        emit OwnerShip(newOwner);
     }
+
+    //  5) create an event that emits anytime ownerShip is transfered (including in the constructor)
+    event OwnerShip(address newOwner);
+
 }
 
 //  TODO's: Create a Pausable contract that inherits from the Ownable contract
