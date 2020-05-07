@@ -82,10 +82,6 @@ contract SolnSquareVerifier is CustomERC721Token {
         addSolution(a, b, c, input);
         return super.mint(to, tokenId);
     }
-
-
-
-
 }
 
 
