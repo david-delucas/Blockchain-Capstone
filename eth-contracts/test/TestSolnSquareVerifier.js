@@ -7,15 +7,16 @@ var SolnSquareVerifier = artifacts.require('SolnSquareVerifier');
 contract('TestSolnSquareVerifier', accounts => {
 
     const account_one = accounts[0];
-    const account_two = accounts[1];
+    const account_two = accounts[9];
 
     const { proof, inputs } = {
         "proof": {
-            "a": ["0x017a6435eb58818971a68ba911c6a3e9b6e6d7668178ae4faad5dc5440a156e1", "0x0c1502f424b34b284ab7390aca0af9f3ca7aa0e0b912657a97789871ee3d3431"],
-            "b": [["0x19ccd846a4e94793a6fa25e635ca90ea3ffdd35422ab3caae915eaec29f10692", "0x0eb75af125871f2d43600b1d0759e16ae8725ad5aad4a49af1075fc2376277b8"], ["0x2ce8e0f63a17cf41aa1f8b946ceae03fb580402c2862bb4e5f0dfcebb11e2000", "0x03d4c25fc0535d06817f614c81ba94e152e4b2c2ac697ccfcdb0ba781c840af5"]],
-            "c": ["0x2ed6de69cd3b09fb4f4602efe0c6a9db6175476132d67e9681e8d4c3db6ad462", "0x16895e078ce16b3d784981c00a63d61c366acfc9fd75ae69c41bfdbf4c02c485"]
+            "a": ["0x302cc6dcb61c6dfcbb99e680bd5b58f2a3a9502e97a18b7a65aa6e0605b67213", "0x098fc6dee9e9e622e75247d1d1099899ad858ffc5aa6d8f4adf0ba6a404b8133"],
+            "b": [["0x0e9406711a18b050318e92d2f22b6126e8e9a4bea248b20518f6358238c1a1a7", "0x04dc1232a4da3053259e254298992640cc9386e3aa78fd5a3fec9f01ab23acb0"], ["0x2b5348334654d36ff480f1033e99cb4cf961e76c5a54074c176e2d90c7a25412", "0x04195b97fe231539c35add33d324b879a15e85dcebf7c74993971eef296dc5b7"]],
+            "c": ["0x1374dc843afc5064a31e4277a24dcac6b64369875f151c47093e81f7086ed8f0", "0x25461ae652073d53117038dd66a865d6141d2a8668ed085971c26fc806eb9c97"]
         },
-        "inputs": ["0x0000000000000000000000000000000000000000000000000000000000000009", "0x0000000000000000000000000000000000000000000000000000000000000001"]
+        "inputs": ["0x0000000000000000000000000000000000000000000000000000000000406d0e", "0x0000000000000000000000000000000000000000000000000000000000000000"]
+
     };
 
     describe('SolnSquareVerifier test', function () {
@@ -29,13 +30,19 @@ contract('TestSolnSquareVerifier', accounts => {
         // Test if a new solution can be added for contract - SolnSquareVerifier
         it('Test if a new solution can be added for contract - SolnSquareVerifier', async function () {
             const result = await this.contract.addSolution(proof.a, proof.b, proof.c, inputs);
-            assert.equal('SolutionAdded', result.logs[0].event, "a new solution should be added for contract - SolnSquareVerifier");
-            assert.equal('0x746e04EA8466A40c842994611d6aA3B9dD9fc8be', result.logs[0].args['0']);
+            assert.equal(result.logs[0].event, 'AddedSolution', "A new solution should be added for contract - SolnSquareVerifier");
         })
         // Test if an ERC721 token can be minted for contract - SolnSquareVerifier
         it('Test if an ERC721 token can be minted for contract - SolnSquareVerifier', async function () {
-            const result = await this.contract.mint.call(proof.a, proof.b, proof.c, inputs, account_one, 1);
-            assert.equal(true, result, "A token should be minted for contract - SolnSquareVerifier");
+            var result = 'Error'; 
+            try {
+                result = await this.contract.mint(proof.a, proof.b, proof.c, inputs, account_two, 1);
+                //console.log(JSON.stringify(result));    
+            } catch (e) {
+                console.log(e);            
+            }
+            assert.equal(result.logs[0].event, 'AddedSolution', "A token should be minted for contract - SolnSquareVerifier");
+
         })
     });
 })

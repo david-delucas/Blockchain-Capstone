@@ -31,7 +31,7 @@ contract('TestSquareVerifier', accounts => {
 
         })
 
-    
+  
         // Test verification with incorrect proof
         it('Test verification with incorrect proof', async function () {
 
