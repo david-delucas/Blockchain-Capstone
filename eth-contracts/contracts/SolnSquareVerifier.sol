@@ -1,15 +1,13 @@
 pragma solidity >=0.4.21 <0.6.0;
 
 import "./ERC721Mintable.sol";
-import "./Verifier.sol";
+
 import 'openzeppelin-solidity/contracts/drafts/Counters.sol';
 
 
 
 // TODO define a contract call to the zokrates generated solidity contract <Verifier> or <renamedVerifier>
-contract SquareVerifier is Verifier {
-
-}
+import "./Verifier.sol";
 
 
 // TODO define another contract named SolnSquareVerifier that inherits from your ERC721Mintable class
@@ -22,12 +20,12 @@ contract SolnSquareVerifier is CustomERC721Token {
         Counters.Counter index;
     }
 
-    SquareVerifier internal verifier;
+    Verifier internal verifier;
 
 
     constructor(address _account) public
     {
-        verifier = SquareVerifier(_account);
+        verifier = Verifier(_account);
     }
 
     // TODO define an array of the above struct

@@ -1,7 +1,6 @@
 
 
 var Verifier = artifacts.require('Verifier');
-var SquareVerifier = artifacts.require('SquareVerifier');
 var SolnSquareVerifier = artifacts.require('SolnSquareVerifier');
 
 contract('TestSolnSquareVerifier', accounts => {
@@ -22,8 +21,7 @@ contract('TestSolnSquareVerifier', accounts => {
     describe('SolnSquareVerifier test', function () {
         beforeEach(async function () {
             contractVerifier = await Verifier.new({from: account_one});
-            contractSquareVerifier = await SquareVerifier.new({from: account_one});
-            this.contract = await SolnSquareVerifier.new(contractSquareVerifier.address, {from: account_one});
+            this.contract = await SolnSquareVerifier.new(contractVerifier.address, {from: account_one});
         })
 
 
