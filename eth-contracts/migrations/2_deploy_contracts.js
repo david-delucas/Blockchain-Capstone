@@ -5,8 +5,6 @@ var Verifier = artifacts.require("./Verifier.sol");
 var CustomERC721Token = artifacts.require("./CustomERC721Token.sol");
 
 module.exports = function(deployer) {
-  deployer.deploy(CustomERC721Token);
-  deployer.deploy(Verifier);
   deployer.deploy(SquareVerifier)
       .then(() => {
         return deployer.deploy(SolnSquareVerifier, SquareVerifier.address);
